@@ -11,7 +11,7 @@ namespace ConsoleApiCall
   {
     static void Main(string[] args)
     {
-      var apiCallTask = ApiHelper.ApiCall("7pDvtOQij86QhVxY9u4IQGziKLu2G6TU");
+      var apiCallTask = ApiHelper.ApiCall("apiiiikey");
       var result = apiCallTask.Result;
       JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
       List<Article> articleList = JsonConvert.DeserializeObject<List<Article>>(jsonResponse["results"].ToString());
