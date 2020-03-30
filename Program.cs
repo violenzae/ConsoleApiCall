@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using RestSharp;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 
 namespace ConsoleApiCall
 {
@@ -8,9 +11,19 @@ namespace ConsoleApiCall
   {
     static void Main(string[] args)
     {
-      var apiCallTask = ApiHelper.ApiCall("[YOUR-API-KEY-HERE]");
+      var apiCallTask = ApiHelper.ApiCall("7pDvtOQij86QhVxY9u4IQGziKLu2G6TU");
       var result = apiCallTask.Result;
-      Console.WriteLine(result);
+      JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
+      List<Article> articleList = JsonConvert.DeserializeObject<List<Article>>(jsonResponse["results"].ToString());
+
+      foreach (Article article in articleList)
+      {
+          Console.WriteLine($"Section: {article.Section}");
+          Console.WriteLine($"Title: {article.Title}");
+          Console.WriteLine($"Abstract: {article.Abstract}");
+          Console.WriteLine($"Url: {article.Url}");
+          Console.WriteLine($"Byline: {article.Byline}");
+      }
     }
   }
   class ApiHelper
